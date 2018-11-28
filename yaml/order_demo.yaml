@@ -1,0 +1,62 @@
+version: '2'
+
+networks:
+  default:
+
+services:
+
+  -ContainerIdForReplace-:
+    container_name: -ContainerIdForReplace-
+    image: hyperledger/fabric-orderer
+    privileged: true
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 1024M
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=debug
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/etc/hyperledger/configtx/genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=-OrderIDForReplace-
+      - ORDERER_GENERAL_LOCALMSPDIR=/etc/hyperledger/crypto/orderer/msp
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/etc/hyperledger/crypto/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/etc/hyperledger/crypto/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/etc/hyperledger/crypto/orderer/tls/ca.crt]
+      - ORDERER_KAFKA_RETRY_SHORTINTERVAL=3s
+      - ORDERER_KAFKA_RETRY_SHORTTOTAL=50s
+      - ORDERER_KAFKA_VERBOSE=true
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderers
+    command: orderer
+    ports:
+      - -OrderPortForReplace-:7050
+    volumes:
+########Order_Start     
+      - ./channel:/etc/hyperledger/configtx
+      - ./channel/crypto-config:/etc/hyperledger/fabric/crypto
+      - ./channel/crypto-config/ordererOrganizations/hlc.com/orderers/orderer1.hlc.com/:/etc/hyperledger/crypto/orderer
+      - ./channel/crypto-config/peerOrganizations/nxia.hlc.com/peers/peer0.nxia.hlc.com/:/etc/hyperledger/crypto/peerNxia
+      - ./channel/crypto-config/peerOrganizations/nmen.hlc.com/peers/peer0.nmen.hlc.com/:/etc/hyperledger/crypto/peerNmen
+      - ./channel/crypto-config/peerOrganizations/dubai.hlc.com/peers/peer0.dubai.hlc.com/:/etc/hyperledger/crypto/peerDubai
+      - ./channel/crypto-config/peerOrganizations/manager.hlc.com/peers/peer0.manager.hlc.com/:/etc/hyperledger/crypto/peerManage
+########Order_End 
+
+########Kafka_Start
+    extra_hosts:
+      - kafka0.-DomainForReplace-:-KafkaIpForReplace-
+      - kafka1.-DomainForReplace-:-KafkaIpForReplace-
+      - kafka2.-DomainForReplace-:-KafkaIpForReplace-
+      - kafka3.-DomainForReplace-:-KafkaIpForReplace-
+########Kafka_End
+
+########Kafka_OneIp_Start
+    depends_on:
+      - kafka0.-DomainForReplace-
+      - kafka1.-DomainForReplace-
+      - kafka2.-DomainForReplace-
+      - kafka3.-DomainForReplace-
+########Kafka_OneIp_End
+    networks:
+      - default

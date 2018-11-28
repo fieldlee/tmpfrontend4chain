@@ -1,0 +1,12 @@
+{
+  "couchdb" :{
+    "ip":"127.0.0.1",
+    "port":4984,
+    "username":"couchadmin",
+    "password":"adminpwd"
+  },
+  "listen" :{
+    "ip":"0.0.0.0",
+    "port":"8000"
+  }
+}
