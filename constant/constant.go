@@ -7,8 +7,8 @@ const (
 	COUCHUSERNAME = "couchadmin"
 	COUCHPASSWORD = "adminpwd"
 	// 本机ip
-	CURIP      = "192.168.0.35"
-	CURURLROOT = "http://192.168.0.35:8000"
+	CURIP      = "192.168.0.15"
+	CURURLROOT = "http://192.168.0.15:8000"
 	// SDK
 	SDKGITURL = "https://github.com/fieldlee/sdk.git"
 
