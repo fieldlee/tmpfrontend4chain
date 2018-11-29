@@ -10,7 +10,7 @@ const (
 	CURIP      = "192.168.0.15"
 	CURURLROOT = "http://192.168.0.15:8000"
 	// SDK
-	SDKGITURL = "https://github.com/fieldlee/sdk.git"
+	SDKGITURL = "https://github.com/fieldlee/fabricSdk.git"
 
 	// 状态列表
 	SAVEED   = "saved"
