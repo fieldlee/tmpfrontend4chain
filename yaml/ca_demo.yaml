@@ -8,11 +8,6 @@ services:
   -ContainerIdForReplace-:
     image: hyperledger/fabric-ca
     privileged: true
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 500M
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/-OrgCAIDForReplace-.-OrgIDForReplace-.-DomainForReplace--cert.pem

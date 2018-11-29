@@ -9,11 +9,6 @@ services:
     container_name: -ContainerIdForReplace-
     image: hyperledger/fabric-orderer
     privileged: true
-    deploy:
-      resources:
-        limits:
-          cpus: '1.00'
-          memory: 1024M
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
